@@ -1,14 +1,25 @@
 #ifndef INPUTPICTURE_HPP
 #define INPUTPICTURE_HPP
 
-#include "opencv2/opencv.hpp"
+
 #include <QString>
 #include <QPushButton>
 #include <QLabel>
+#include <QImage>
+
+#include "opencv2/core.hpp"
+#include "opencv2/opencv.hpp"
+#include "opencv/cv.h"
+#include "opencv2/highgui/highgui.hpp"
+
+using namespace cv;
+
 class InputPicture{
 public:
     InputPicture();
     QPushButton *Btnloadfile;
+
+    QImage Mat2QImage(Mat& image);
 private:
     void InitUI();
     void InitData();
