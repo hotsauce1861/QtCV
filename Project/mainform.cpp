@@ -1,5 +1,5 @@
 #include "mainform.h"
-
+#include <QPushButton>
 mainform::mainform(QWidget *parent) : QMainWindow(parent)
 {
     InitUI();
@@ -14,10 +14,31 @@ void mainform::InitData(){
 
 void mainform::InitUI(){
 
-    QHBoxLayout *mainLayout = new QHBoxLayout();
+
+    QVBoxLayout *mainLayout = new QVBoxLayout();
     mainTabwidget = new QTabWidget();
+
+    QHBoxLayout *topLayout = new QHBoxLayout();
+    QHBoxLayout *middleLayout = new QHBoxLayout();
+    QHBoxLayout *buttonLayout = new QHBoxLayout();
+
+    QWidget *newWidget = new QWidget(this);
+    newWidget->setLayout(mainLayout);
+    this->setCentralWidget(newWidget);
+
+    mainLayout->addLayout(topLayout);
+    mainLayout->addLayout(middleLayout);
+    mainLayout->addLayout(buttonLayout);
+
+    QPushButton *temp = new QPushButton();
+
+    temp->setText(tr("test"));
     //mainTabwidget->addTab();
-    mainLayout->addWidget(mainTabwidget);
+    buttonLayout->addWidget(temp);
+    //mainTabwidget->addTab(&temp,tr("test"));
+    //mainLayout->addWidget(mainTabwidget);
+    //this->setLayout(mainLayout);
+
 }
 
 void mainform::InitConnect(){
