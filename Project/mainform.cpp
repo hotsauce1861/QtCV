@@ -1,19 +1,20 @@
 #include "mainform.h"
 #include <QPushButton>
+
 mainform::mainform(QWidget *parent) : QMainWindow(parent)
 {
-    InitUI();
     InitData();
+    InitUI();
     InitConnect();
 }
 
 void mainform::InitData(){
-
-
+    picOpt = new InputPicture();
+    picDis = new InputPicture();
+    picFilter = new InputPicture();
 }
 
 void mainform::InitUI(){
-
 
     QVBoxLayout *mainLayout = new QVBoxLayout();
     mainTabwidget = new QTabWidget();
@@ -32,15 +33,21 @@ void mainform::InitUI(){
 
     QPushButton *temp = new QPushButton();
 
-    temp->setText(tr("test"));
+    temp->setText(tr("Connect"));
     //mainTabwidget->addTab();
+
+    mainTabwidget = new QTabWidget();
+    mainTabwidget->addTab(picDis,tr("Display"));
+    mainTabwidget->addTab(picOpt,tr("Operation"));
+    mainTabwidget->addTab(picFilter,tr("Filter"));
+
     buttonLayout->addWidget(temp);
-    //mainTabwidget->addTab(&temp,tr("test"));
-    //mainLayout->addWidget(mainTabwidget);
+    topLayout->addWidget(mainTabwidget);
     //this->setLayout(mainLayout);
 
 }
 
-void mainform::InitConnect(){
+void mainform::InitConnect()
+{
 
 }

@@ -7,6 +7,8 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
+#include "inputpicture.hpp"
+
 class mainform : public QMainWindow
 {
     Q_OBJECT
@@ -15,6 +17,12 @@ public:
 
 public:
     QTabWidget *mainTabwidget;
+
+private:
+    InputPicture *picOpt;
+    InputPicture *picDis;
+    InputPicture *picFilter;
+
 private:
     void InitUI();
     void InitData();

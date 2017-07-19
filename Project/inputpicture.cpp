@@ -1,29 +1,53 @@
 #include "inputpicture.hpp"
 #include <QFileDialog>
 
-
-
 //imread
 //imwrite
 //imshow
 //nameWindow
 
-InputPicture::InputPicture()
+InputPicture::InputPicture(QWidget *parent):
+    QWidget(parent)
 {
-    QString filename = QFileDialog::getOpenFileName(0, "Open File", "", "*.jpg *.png *.bmp", 0);
-    if (filename.isNull()) {
-        return ;
-    }
+    InitData();
+    InitUI();
+    InitConnect();
 
-    Mat image = imread(filename.toStdString().data(), 1);
-    QImage img = Mat2QImage(image);
+}
 
-    QLabel *label = new QLabel("", 0);
-    label->setPixmap(QPixmap::fromImage(img));
+void InputPicture::InitData()
+{
+    Btnloadfile = new QPushButton();
+    label = new QLabel();
+}
+
+void InputPicture::InitConnect()
+{
+    connect(Btnloadfile,SIGNAL(clicked()),this,SLOT(loadpicture()));
+}
+
+void InputPicture::InitUI()
+{
+    mainLayout = new QVBoxLayout();
+
+    label->setText(tr(""));
+    label->setScaledContents(true);
+    label->setFrameStyle(QFrame::Panel);
+
+    Btnloadfile->setText(tr("Browser"));
+    mainLayout->addWidget(label);
+    mainLayout->addWidget(Btnloadfile);
+    this->setLayout(mainLayout);
+
 }
 
 void InputPicture::readfile(QString path){
       //  Mat myMat = imread();
+
+    Mat image = imread(path.toStdString().data(), 1);
+    QImage img = Mat2QImage(image);
+
+    label->setPixmap(QPixmap::fromImage(img));
 }
 
 
@@ -42,6 +66,17 @@ QImage InputPicture::Mat2QImage(Mat& image)
         img = QImage((const unsigned char *)(image.data), image.cols, image.rows,
                 image.cols*image.channels(), QImage::Format_RGB888);
     }
-
     return img;
+}
+
+void InputPicture::loadpicture()
+{
+    QString filename = QFileDialog::getOpenFileName(0, "Open File", "", "*.jpg *.png *.bmp", 0);
+    if (filename.isNull()) {
+        return ;
+    }
+    Mat image = imread(filename.toStdString().data(), 1);
+    QImage img = Mat2QImage(image);
+
+    label->setPixmap(QPixmap::fromImage(img));
 }
