@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     mainform *myform = new mainform();
     myform->setWindowTitle("QtCv");
     myform->setGeometry(0,0,1024,768);
+    myform->setFixedSize(1024,600);
     myform->show();
 
     return app.exec();

@@ -1,6 +1,6 @@
 #include "inputpicture.hpp"
 #include <QFileDialog>
-
+#include <QRadioButton>
 //imread
 //imwrite
 //imshow
@@ -18,7 +18,9 @@ InputPicture::InputPicture(QWidget *parent):
 void InputPicture::InitData()
 {
     Btnloadfile = new QPushButton();
-    label = new QLabel();
+    m_label_target = new QLabel();
+    m_label_processed = new QLabel();
+
 }
 
 void InputPicture::InitConnect()
@@ -30,13 +32,35 @@ void InputPicture::InitUI()
 {
     mainLayout = new QVBoxLayout();
 
-    label->setText(tr(""));
-    label->setScaledContents(true);
-    label->setFrameStyle(QFrame::Panel);
+    QHBoxLayout *leftLayout = new QHBoxLayout();
+    QHBoxLayout *middleLayout = new QHBoxLayout();
+
+    mainLayout->addLayout(leftLayout);
+    mainLayout->addLayout(middleLayout);
+
+
+    m_label_target->setText(tr(""));
+    m_label_target->setFixedWidth(490);
+    m_label_target->setScaledContents(true);
+    m_label_target->setFrameStyle(QFrame::Panel);
+
+    m_label_processed->setText(tr(""));
+    m_label_processed->setFixedWidth(490);
+    m_label_processed->setScaledContents(true);
+    m_label_processed->setFrameStyle(QFrame::Panel);
 
     Btnloadfile->setText(tr("Browser"));
-    mainLayout->addWidget(label);
+    middleLayout->addWidget(m_label_target);
+    middleLayout->addWidget(m_label_processed);
     mainLayout->addWidget(Btnloadfile);
+
+    QRadioButton *ROI = new QRadioButton();
+    ROI->setText(tr("ROI"));
+
+    QRadioButton *COLOR = new QRadioButton();
+    COLOR->setText(tr("Color channels"));
+    leftLayout->addWidget(ROI);
+    leftLayout->addWidget(COLOR);
     this->setLayout(mainLayout);
 
 }
@@ -47,7 +71,7 @@ void InputPicture::readfile(QString path){
     Mat image = imread(path.toStdString().data(), 1);
     QImage img = Mat2QImage(image);
 
-    label->setPixmap(QPixmap::fromImage(img));
+    m_label_target->setPixmap(QPixmap::fromImage(img));
 }
 
 
@@ -78,5 +102,5 @@ void InputPicture::loadpicture()
     Mat image = imread(filename.toStdString().data(), 1);
     QImage img = Mat2QImage(image);
 
-    label->setPixmap(QPixmap::fromImage(img));
+    m_label_target->setPixmap(QPixmap::fromImage(img));
 }

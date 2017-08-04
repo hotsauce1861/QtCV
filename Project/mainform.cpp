@@ -38,7 +38,7 @@ void mainform::InitUI(){
 
     mainTabwidget = new QTabWidget();
     mainTabwidget->addTab(picDis,tr("Display"));
-    mainTabwidget->addTab(picOpt,tr("Operation"));
+    //mainTabwidget->addTab(picOpt,tr("Operation"));
     mainTabwidget->addTab(picFilter,tr("Filter"));
 
     buttonLayout->addWidget(temp);
@@ -50,4 +50,9 @@ void mainform::InitUI(){
 void mainform::InitConnect()
 {
 
+}
+
+void mainform::paintEvent(QPaintEvent *e){
+    picOpt->m_label_target->resize(this->size());
+    picOpt->m_label_processed->resize(this->size());
 }

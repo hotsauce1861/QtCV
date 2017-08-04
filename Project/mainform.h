@@ -6,6 +6,7 @@
 #include <QTabWidget>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QPaintEvent>
 
 #include "inputpicture.hpp"
 
@@ -27,6 +28,8 @@ private:
     void InitUI();
     void InitData();
     void InitConnect();
+protected:
+    virtual void paintEvent(QPaintEvent *e);
 signals:
 
 public slots:

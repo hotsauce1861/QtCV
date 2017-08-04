@@ -24,10 +24,12 @@ public:
     QPushButton *Btnloadfile;
 
     QImage Mat2QImage(Mat& image);
+    QLabel *m_label_target;
+    QLabel *m_label_processed;
 private:
 
     QVBoxLayout* mainLayout;
-    QLabel *label;
+
     void InitUI();
     void InitData();
     void InitConnect();
